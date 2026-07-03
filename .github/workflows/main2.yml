@@ -73,11 +73,42 @@ jobs:
         with:
           name: build-outputs
 
+      - name: Checkout repository (for source archive)
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Show downloaded artifacts
+        run: |
+          echo "Listing build-outputs contents"
+          ls -R build-outputs || true
+
+      - name: Prepare release assets
+        run: |
+          set -e
+          # Ensure zip is available
+          if ! command -v zip >/dev/null 2>&1; then
+            sudo apt-get update && sudo apt-get install -y zip
+          fi
+
+          # Create a source zip of the repository (exclude .git and build artifacts)
+          zip -r source-code.zip . -x .git\* build\* _bin/Packages\* build-outputs\* .github/workflows/main2.yml
+
+          # Create release-assets directory and copy EXE installers (x64/x86)
+          mkdir -p release-assets || true
+          find build-outputs -type f -iname "*x64*.exe" -exec cp {} release-assets/ \; || true
+          find build-outputs -type f -iname "*x86*.exe" -exec cp {} release-assets/ \; || true
+
+          # List release-assets
+          echo "Release assets:"
+          ls -la release-assets || true
+
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
           files: |
-            *installer.zip
-            *.7z
+            release-assets/**/*x64*.exe
+            release-assets/**/*x86*.exe
+            source-code.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
