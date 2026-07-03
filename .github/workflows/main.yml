@@ -82,3 +82,5 @@ jobs:
           name: "Zip x86" 
           path: _bin/Packages/**/MPC-BE*.x86.7z
           compression-level: 0
+# Add this line to enable manual triggering:
+  workflow_dispatch:
