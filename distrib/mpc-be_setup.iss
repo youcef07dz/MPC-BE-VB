@@ -284,7 +284,9 @@ Name: {group}\{cm:ProgramOnTheWeb,{#app_name}};      Filename: {#app_url}
 [Run]
 Filename: "{app}\{#mpcbe_exe}";      WorkingDir: "{app}"; Flags: nowait postinstall skipifsilent unchecked;           Description: "{cm:LaunchProgram,{#app_name}}"
 Filename: "{app}\Changelog.txt";     WorkingDir: "{app}"; Flags: nowait postinstall skipifsilent unchecked shellexec; Description: "{cm:ViewChangelog}"; Check: IsInactiveLang('ru')
+#ifdef localize
 Filename: "{app}\Changelog.Rus.txt"; WorkingDir: "{app}"; Flags: nowait postinstall skipifsilent unchecked shellexec; Description: "{cm:ViewChangelog}"; Languages: ru
+#endif
 
 [InstallDelete]
 Type: files; Name: "{userdesktop}\{#app_name}.lnk";   Check: not WizardIsTaskSelected('desktopicon\user')   and IsUpgrade()
