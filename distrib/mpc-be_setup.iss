@@ -27,7 +27,9 @@
 ; Inno Setup Unicode: http://www.jrsoftware.org/isdl.php
 
 ; If you want to compile the 32-bit version define "Win32Build" (uncomment the define below or use build.bat)
+#ifndef CI_BUILD
 #define localize
+#endif
 ;#define Win32Build
 
 ; Don't forget to update the DirectX SDK number in "include\Version.h" (not updated so often)

@@ -1,14 +1,17 @@
-# MPC-BE-VB — Media Player Classic with 10x Volume Boost
+# MPC-BE-VB — Media Player Classic with Volume Boost
 
-MPC-BE-VB is a fork of [MPC-BE](https://github.com/Aleksoid1978/MPC-BE) (Media Player Classic - Black Edition) that extends the volume range from 100% to **1000%** (10x), controllable via mouse wheel — just like VLC.
+MPC-BE-VB is a fork of [MPC-BE](https://github.com/Aleksoid1978/MPC-BE) (Media Player Classic - Black Edition) that extends the volume range from 100% to **1000%** (10x) by default, with a configurable boost ceiling up to **2000%** (20x) and adjustable step size — all controllable via mouse wheel, just like VLC.
 
 ## What's different from upstream MPC-BE
 
-- **Volume range 0–1000%** instead of 0–100%
-- **Mouse wheel over the volume slider** boosts up to 1000%
+- **Volume range 0–1000%** instead of 0–100% (configurable ceiling 1x–20x via boost slider in Audio options)
+- **Adjustable step size** (1–20 slider positions per click, default 5) with Boost/Step preset submenus under Play > Volume
+- **Mouse wheel over the volume slider** boosts up to the configured ceiling
 - **Visual bar stays at full width** for values above 100% (clean UI)
 - **Audio renderer handles boost** via the same logarithmic volume curve (`dB = 2000 * log10(v/100)`)
 - **Registry, command-line, Web UI, LCD** — all interfaces support the full range
+- **LTCG removed** from common.props to fix soxr heap corruption on rebuild
+- **Auto-update disabled** — no startup check, no menu item, no background poll
 
 ## System requirements
 * An SSE2 capable CPU
@@ -16,8 +19,14 @@ MPC-BE-VB is a fork of [MPC-BE](https://github.com/Aleksoid1978/MPC-BE) (Media P
 * Windows 7, 8, 8.1, 10, 11 32-bit/64-bit
 
 ## Downloads
-- [Releases](https://github.com/youcef07dz/mbc-be-vb/releases)
-- [Get code](https://github.com/youcef07dz/mbc-be-vb.git)
+- [Releases](https://github.com/youcef07dz/MPC-BE-VB/releases)
+- [Get code](https://github.com/youcef07dz/MPC-BE-VB.git)
+
+## CI Builds
+Pushing a tag `v*` triggers [GitHub Actions](.github/workflows/build.yml) to:
+- Build x86 and x64 Release binaries (mpc-be, mpciconlib, MPCBEShellExt)
+- Create Inno Setup installers for both platforms
+- Publish installers as downloadable release assets
 
 ---
  
