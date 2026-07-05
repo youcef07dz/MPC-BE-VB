@@ -28,6 +28,13 @@ Pushing a tag `v*` triggers [GitHub Actions](.github/workflows/build.yml) to:
 - Create Inno Setup installers for both platforms
 - Publish installers as downloadable release assets
 
+## Screenshots
+
+| | |
+|---|---|
+| ![](mp1.webp) | ![](mp2.webp) |
+| ![](mp3.webp) | |
+
 ---
  
 For the people involved in the development, see Authors.txt.
