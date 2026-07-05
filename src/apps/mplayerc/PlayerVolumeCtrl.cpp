@@ -509,8 +509,10 @@ BOOL CVolumeCtrl::OnToolTipNotify(UINT id, NMHDR* pNMHDR, LRESULT* pResult)
 {
 	TOOLTIPTEXTW *pTTT = reinterpret_cast<LPTOOLTIPTEXTW>(pNMHDR);
 	CString str;
+	const auto& s = AfxGetAppSettings();
+	const int nEffective = GetPos() * s.nVolumeBoost / 10;
 
-	str.AppendFormat(L"%d%%", GetPos());
+	str.AppendFormat(L"%d%%", nEffective);
 
 	if (AfxGetAppSettings().fMute) { // TODO: remove i
 		CString no_sound_str = ResStr(ID_VOLUME_MUTE_DISABLED);

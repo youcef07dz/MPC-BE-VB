@@ -84,6 +84,7 @@
 #define IDS_RS_AUDIOLEVELCENTER				L"LevelCenter"
 #define IDS_RS_AUDIOLEVELSURROUND			L"LevelSurround"
 #define IDS_RS_AUDIOGAIN					L"Gain"
+#define IDS_RS_VOLUMEBOOST				L"VolumeBoost"
 #define IDS_RS_AUDIOAUTOVOLUMECONTROL		L"AutoVolumeControl"
 #define IDS_RS_AUDIONORMBOOST				L"NormBoost"
 #define IDS_RS_AUDIONORMLEVEL				L"NormLevel"
@@ -123,7 +124,7 @@
 #define IDS_RS_WEBSERVERCGI					L"CGIHandlers"
 #define IDS_RS_WEBDEFINDEX					L"DefaultPage"
 
-// ÎnlineServices
+// ï¿½nlineServices
 #define IDS_R_ONLINESERVICES				L"OnlineServices"
 #define IDS_R_YOUTUBECACHE					L"OnlineServices\\YoutubeCache"
 #define IDS_RS_YDL_ENABLE					L"YDLEnable"

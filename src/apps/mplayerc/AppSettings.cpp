@@ -467,6 +467,7 @@ void CAppSettings::ResetSettings()
 	fLoopForever = false;
 	fRewind = false;
 	nVolumeStep = 5;
+	nVolumeBoost = 5;
 	nSpeedStep = 0; // auto
 	bSpeedNotReset = false;
 
@@ -866,7 +867,8 @@ void CAppSettings::LoadSettings(bool bForce/* = false*/)
 	profile.ReadInt(IDS_R_SETTINGS, IDS_RS_LOOPNUM, nLoops);
 	profile.ReadBool(IDS_R_SETTINGS, IDS_RS_LOOP, fLoopForever);
 	profile.ReadBool(IDS_R_SETTINGS, IDS_RS_REWIND, fRewind);
-	profile.ReadInt(IDS_R_SETTINGS, IDS_RS_VOLUME_STEP, nVolumeStep, 1, 10);
+	profile.ReadInt(IDS_R_SETTINGS, IDS_RS_VOLUME_STEP, nVolumeStep, 1, 20);
+	profile.ReadInt(IDS_R_SETTINGS, IDS_RS_VOLUMEBOOST, nVolumeBoost, 1, 20);
 	profile.ReadInt(IDS_R_SETTINGS, IDS_RS_SPEED_STEP, nSpeedStep);
 	nSpeedStep = discard(nSpeedStep, 0, { 1, 5, 10, 20, 25, 50, 100 });
 	profile.ReadBool(IDS_R_SETTINGS, IDS_RS_SPEED_NOTRESET, bSpeedNotReset);
@@ -1595,6 +1597,7 @@ void CAppSettings::SaveSettings()
 	profile.WriteBool(IDS_R_SETTINGS, IDS_RS_LOOP, fLoopForever);
 	profile.WriteBool(IDS_R_SETTINGS, IDS_RS_REWIND, fRewind);
 	profile.WriteInt(IDS_R_SETTINGS, IDS_RS_VOLUME_STEP, nVolumeStep);
+	profile.WriteInt(IDS_R_SETTINGS, IDS_RS_VOLUMEBOOST, nVolumeBoost);
 	profile.WriteInt(IDS_R_SETTINGS, IDS_RS_SPEED_STEP, nSpeedStep);
 	profile.WriteBool(IDS_R_SETTINGS, IDS_RS_SPEED_NOTRESET, bSpeedNotReset);
 

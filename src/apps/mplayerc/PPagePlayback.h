@@ -39,8 +39,7 @@ public:
 	int			m_nLoops       = 0;
 	BOOL		m_fRewind      = FALSE;
 
-	int			m_nVolumeStep  = 1;
-	CComboBox	m_nVolumeStepCtrl;
+
 	CComboBox	m_nSpeedStepCtrl;
 	BOOL		m_bSpeedNotReset = FALSE;
 

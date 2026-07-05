@@ -576,6 +576,7 @@ public:
 	// Playback
 	int				nVolume;
 	int				nVolumeStep;
+	int				nVolumeBoost;
 	bool			fMute;
 	int				nBalance;
 	int				nLoops;

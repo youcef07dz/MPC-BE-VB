@@ -421,6 +421,8 @@ BEGIN_MESSAGE_MAP(CMainFrame, CFrameWnd)
 
 	ON_COMMAND_RANGE(ID_FILTERSTREAMS_SUBITEM_START, ID_FILTERSTREAMS_SUBITEM_END, OnSelectStream)
 	ON_COMMAND_RANGE(ID_VOLUME_UP, ID_VOLUME_MUTE, OnPlayVolume)
+	ON_COMMAND_RANGE(ID_BOOST_2, ID_BOOST_20, OnVolumeBoostPreset)
+	ON_COMMAND_RANGE(ID_STEP_1, ID_STEP_20, OnVolumeStepPreset)
 	ON_COMMAND_RANGE(ID_VOLUME_GAIN_INC, ID_VOLUME_GAIN_MAX, OnPlayVolumeGain)
 	ON_COMMAND(ID_NORMALIZE, OnAutoVolumeControl)
 	ON_COMMAND_RANGE(ID_AUDIO_CENTER_INC, ID_AUDIO_CENTER_DEC, OnPlayCenterLevel)
@@ -465,7 +467,7 @@ BEGIN_MESSAGE_MAP(CMainFrame, CFrameWnd)
 	ON_COMMAND_RANGE(ID_RECENT_FILE_START, ID_RECENT_FILE_END, OnRecentFile)
 
 	ON_COMMAND(ID_HELP_HOMEPAGE, OnHelpHomepage)
-	ON_COMMAND(ID_HELP_CHECKFORUPDATE, OnHelpCheckForUpdate)
+	//ON_COMMAND(ID_HELP_CHECKFORUPDATE, OnHelpCheckForUpdate) // ponytail: disabled auto-update
 	//ON_COMMAND(ID_HELP_DOCUMENTATION, OnHelpDocumentation)
 	ON_COMMAND(ID_HELP_TOOLBARIMAGES, OnHelpToolbarImages)
 	//ON_COMMAND(ID_HELP_DONATE, OnHelpDonate)
@@ -9206,10 +9208,11 @@ void CMainFrame::OnMenuAfterPlayback()
 void CMainFrame::OnPlayVolume(UINT nID)
 {
 	CString strVolume;
+	const int nEffective = m_wndToolBar.m_volctrl.GetPos() * AfxGetAppSettings().nVolumeBoost / 10;
 	if (AfxGetAppSettings().fMute) {
-		strVolume.Format(ResStr(IDS_VOLUME_OSD_MUTE), m_wndToolBar.m_volctrl.GetPos());
+		strVolume.Format(ResStr(IDS_VOLUME_OSD_MUTE), nEffective);
 	} else {
-		strVolume.Format(ResStr(IDS_VOLUME_OSD), m_wndToolBar.m_volctrl.GetPos());
+		strVolume.Format(ResStr(IDS_VOLUME_OSD), nEffective);
 	}
 
 	if (m_eMediaLoadState == MLS_LOADED) {
@@ -9219,7 +9222,31 @@ void CMainFrame::OnPlayVolume(UINT nID)
 	}
 
 	m_OSD.DisplayMessage(OSD_TOPLEFT, strVolume, 3000);
-	m_Lcd.SetVolume((m_wndToolBar.Volume > -10000 ? m_wndToolBar.m_volctrl.GetPos() : 1));
+	m_Lcd.SetVolume((m_wndToolBar.Volume > -10000 ? nEffective : 1));
+}
+
+static const int BoostValues[] = { 2, 5, 10, 20 };
+static const int StepValues[] = { 1, 2, 5, 10, 20 };
+
+void CMainFrame::OnVolumeBoostPreset(UINT nID)
+{
+	CAppSettings& s = AfxGetAppSettings();
+	s.nVolumeBoost = BoostValues[nID - ID_BOOST_2];
+	s.SaveSettings();
+	CString osdMsg;
+	osdMsg.Format(L"Volume Boost: %dx", s.nVolumeBoost);
+	m_OSD.DisplayMessage(OSD_TOPLEFT, osdMsg, 3000);
+}
+
+void CMainFrame::OnVolumeStepPreset(UINT nID)
+{
+	CAppSettings& s = AfxGetAppSettings();
+	s.nVolumeStep = StepValues[nID - ID_STEP_1];
+	s.SaveSettings();
+	m_wndToolBar.m_volctrl.SetPageSize(s.nVolumeStep);
+	CString osdMsg;
+	osdMsg.Format(L"Volume Step: %d", s.nVolumeStep);
+	m_OSD.DisplayMessage(OSD_TOPLEFT, osdMsg, 3000);
 }
 
 void CMainFrame::OnPlayVolumeGain(UINT nID)
@@ -10511,11 +10538,12 @@ void CMainFrame::OnHelpHomepage()
 	ShellExecuteW(m_hWnd, L"open", _CRT_WIDE(MPC_VERSION_COMMENTS), nullptr, nullptr, SW_SHOWDEFAULT);
 }
 
-void CMainFrame::OnHelpCheckForUpdate()
-{
-	UpdateChecker updatechecker;
-	updatechecker.CheckForUpdate();
-}
+// ponytail: disabled auto-update
+//void CMainFrame::OnHelpCheckForUpdate()
+//{
+//	UpdateChecker updatechecker;
+//	updatechecker.CheckForUpdate();
+//}
 
 /*
 void CMainFrame::OnHelpDocumentation()

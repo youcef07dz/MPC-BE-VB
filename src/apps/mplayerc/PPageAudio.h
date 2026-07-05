@@ -39,6 +39,8 @@ private:
 
 	std::vector<audioDeviceInfo_t> m_audioDevices;
 	int m_oldVolume = 0; //not very nice solution
+	int m_oldVolumeStep = 5;
+	int m_oldVolumeBoost = 5;
 
 public:
 	CPPageAudio();
@@ -58,6 +60,10 @@ public:
 	CSliderCtrl	m_volumectrl;
 	int			m_nBalance = 0;
 	CSliderCtrl	m_balancectrl;
+	int			m_nVolumeBoost = 5;
+	CSliderCtrl	m_volboostctrl;
+	int			m_nVolumeStep = 5;
+	CSliderCtrl	m_volstepctrl;
 
 	BOOL		m_fAutoloadAudio = FALSE;
 	CString		m_sAudioPaths;

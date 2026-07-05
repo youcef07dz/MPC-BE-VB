@@ -215,6 +215,15 @@
 #define ID_VOLUME_MUTE                  909
 #define ID_VOLUME_MUTE_OFF              910
 #define ID_VOLUME_MUTE_DISABLED         911
+#define ID_BOOST_2     1204
+#define ID_BOOST_5     1205
+#define ID_BOOST_10    1206
+#define ID_BOOST_20    1207
+#define ID_STEP_1      1208
+#define ID_STEP_2      1209
+#define ID_STEP_5      1210
+#define ID_STEP_10     1211
+#define ID_STEP_20     1212
 #define ID_AFTERPLAYBACK_CLOSE          912
 #define ID_AFTERPLAYBACK_STANDBY        913
 #define ID_AFTERPLAYBACK_HIBERNATE      914
@@ -1816,7 +1825,7 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        44105
-#define _APS_NEXT_COMMAND_VALUE         1204
+#define _APS_NEXT_COMMAND_VALUE         1213
 #define _APS_NEXT_CONTROL_VALUE         22054
 #define _APS_NEXT_SYMED_VALUE           24044
 #endif

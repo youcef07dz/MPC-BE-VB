@@ -1078,11 +1078,12 @@ BOOL CMPlayerCApp::InitInstance()
 		m_s.WinLircClient.Connect(m_s.strWinLircAddr);
 	}
 
-	if (m_s.bUpdaterAutoCheck && m_s.slFiles.empty() && !m_s.fLaunchfullscreen) {
-		if (UpdateChecker::IsTimeToAutoUpdate(m_s.nUpdaterDelay, m_s.tUpdaterLastCheck)) {
-			UpdateChecker::CheckForUpdate(true);
-		}
-	}
+	// ponytail: disabled auto-update
+	//if (m_s.bUpdaterAutoCheck && m_s.slFiles.empty() && !m_s.fLaunchfullscreen) {
+	//	if (UpdateChecker::IsTimeToAutoUpdate(m_s.nUpdaterDelay, m_s.tUpdaterLastCheck)) {
+	//		UpdateChecker::CheckForUpdate(true);
+	//	}
+	//}
 
 	SendCommandLine(m_pMainWnd->m_hWnd);
 	RegisterHotkeys();

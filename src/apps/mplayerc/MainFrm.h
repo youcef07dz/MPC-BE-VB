@@ -1103,6 +1103,8 @@ public:
 
 	afx_msg void OnSelectStream(UINT nID);
 	afx_msg void OnPlayVolume(UINT nID);
+	afx_msg void OnVolumeBoostPreset(UINT nID);
+	afx_msg void OnVolumeStepPreset(UINT nID);
 	afx_msg void OnPlayVolumeGain(UINT nID);
 	afx_msg void OnAutoVolumeControl();
 	afx_msg void OnPlayCenterLevel(UINT nID);
@@ -1137,7 +1139,7 @@ public:
 	afx_msg void OnRecentFile(UINT nID);
 
 	afx_msg void OnHelpHomepage();
-	afx_msg void OnHelpCheckForUpdate();
+	//afx_msg void OnHelpCheckForUpdate(); // ponytail: disabled auto-update
 	//afx_msg void OnHelpDocumentation();
 	afx_msg void OnHelpToolbarImages();
 	//afx_msg void OnHelpDonate();

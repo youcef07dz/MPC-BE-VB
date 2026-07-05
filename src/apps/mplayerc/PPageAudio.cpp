@@ -49,8 +49,12 @@ void CPPageAudio::DoDataExchange(CDataExchange* pDX)
 
 	DDX_Control(pDX, IDC_SLIDER1, m_volumectrl);
 	DDX_Control(pDX, IDC_SLIDER2, m_balancectrl);
+	DDX_Control(pDX, IDC_SLIDER3, m_volboostctrl);
+	DDX_Control(pDX, IDC_SLIDER4, m_volstepctrl);
 	DDX_Slider(pDX, IDC_SLIDER1, m_nVolume);
 	DDX_Slider(pDX, IDC_SLIDER2, m_nBalance);
+	DDX_Slider(pDX, IDC_SLIDER3, m_nVolumeBoost);
+	DDX_Slider(pDX, IDC_SLIDER4, m_nVolumeStep);
 
 	DDX_Check(pDX, IDC_CHECK2, m_fAutoloadAudio);
 	DDX_Text(pDX, IDC_EDIT4, m_sAudioPaths);
@@ -202,8 +206,14 @@ BOOL CPPageAudio::OnInitDialog()
 	m_balancectrl.SetLineSize(2);
 	m_balancectrl.SetPageSize(2);
 	m_balancectrl.SetTicFreq(20);
+	m_volboostctrl.SetRange(1, 20);
+	m_volboostctrl.SetTicFreq(1);
+	m_volstepctrl.SetRange(1, 20);
+	m_volstepctrl.SetTicFreq(1);
 	m_nVolume = m_oldVolume = s.nVolume;
 	m_nBalance = s.nBalance;
+	m_nVolumeBoost = m_oldVolumeBoost = s.nVolumeBoost;
+	m_nVolumeStep = m_oldVolumeStep = s.nVolumeStep;
 
 	m_fAutoloadAudio           = s.fAutoloadAudio;
 	m_fPrioritizeExternalAudio = s.fPrioritizeExternalAudio;
@@ -233,6 +243,9 @@ BOOL CPPageAudio::OnApply()
 
 	s.nVolume = m_oldVolume = m_nVolume;
 	s.nBalance = m_nBalance;
+	s.nVolumeBoost = m_nVolumeBoost;
+	s.nVolumeStep = m_nVolumeStep;
+	AfxGetMainFrame()->m_wndToolBar.m_volctrl.SetPageSize(s.nVolumeStep);
 
 	s.fAutoloadAudio = !!m_fAutoloadAudio;
 	s.fPrioritizeExternalAudio = !!m_fPrioritizeExternalAudio;
@@ -246,6 +259,16 @@ void CPPageAudio::OnHScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar)
 	if (*pScrollBar == m_volumectrl) {
 		UpdateData();
 		AfxGetMainFrame()->m_wndToolBar.Volume = m_nVolume;
+	}
+	else if (*pScrollBar == m_volboostctrl) {
+		UpdateData();
+		AfxGetAppSettings().nVolumeBoost = m_nVolumeBoost;
+		AfxGetMainFrame()->m_wndToolBar.m_volctrl.SetPageSize(AfxGetAppSettings().nVolumeStep);
+	}
+	else if (*pScrollBar == m_volstepctrl) {
+		UpdateData();
+		AfxGetAppSettings().nVolumeStep = m_nVolumeStep;
+		AfxGetMainFrame()->m_wndToolBar.m_volctrl.SetPageSize(m_nVolumeStep);
 	}
 	else if (*pScrollBar == m_balancectrl) {
 		UpdateData();
@@ -407,6 +430,15 @@ void CPPageAudio::OnCancel()
 		AfxGetMainFrame()->m_wndToolBar.Volume = m_oldVolume;    //not very nice solution
 	}
 
+	if (m_nVolumeBoost != m_oldVolumeBoost) {
+		s.nVolumeBoost = m_oldVolumeBoost;
+	}
+
+	if (m_nVolumeStep != m_oldVolumeStep) {
+		s.nVolumeStep = m_oldVolumeStep;
+		AfxGetMainFrame()->m_wndToolBar.m_volctrl.SetPageSize(s.nVolumeStep);
+	}
+
 	if (m_nBalance != s.nBalance) {
 		AfxGetMainFrame()->SetBalance(s.nBalance);
 	}
@@ -431,7 +463,14 @@ BOOL CPPageAudio::OnToolTipNotify(UINT id, NMHDR* pNMHDR, LRESULT* pResult)
 	static CString strTipText;
 
 	if (nID == IDC_SLIDER1) {
-		strTipText.Format(L"%d%%", m_nVolume);
+		const int nEffective = m_nVolume * m_nVolumeBoost / 10;
+		strTipText.Format(L"%d%%", nEffective);
+	}
+	else if (nID == IDC_SLIDER3) {
+		strTipText.Format(L"%dx", m_nVolumeBoost);
+	}
+	else if (nID == IDC_SLIDER4) {
+		strTipText.Format(L"Step %d", m_nVolumeStep);
 	}
 	else if (nID == IDC_SLIDER2) {
 		if (m_nBalance > 0) {

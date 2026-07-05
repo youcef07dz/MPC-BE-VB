@@ -455,6 +455,8 @@ int CPlayerToolBar::GetVolume()
 	if (IsMuted() || volume < 1) {
 		volume = -10000;
 	} else {
+		const int nVolumeBoost = AfxGetAppSettings().nVolumeBoost;
+		volume = volume * nVolumeBoost / 10;
 		volume = (int)(2000 * log10(volume / 100.0f));
 	}
 

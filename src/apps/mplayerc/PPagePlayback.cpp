@@ -44,8 +44,6 @@ void CPPagePlayback::DoDataExchange(CDataExchange* pDX)
 	DDX_Text(pDX, IDC_EDIT1, m_nLoops);
 	DDX_Check(pDX, IDC_CHECK1, m_fRewind);
 
-	DDX_CBIndex(pDX, IDC_COMBOVOLUME, m_nVolumeStep);
-	DDX_Control(pDX, IDC_COMBOVOLUME, m_nVolumeStepCtrl);
 	DDX_Control(pDX, IDC_COMBOSPEEDSTEP, m_nSpeedStepCtrl);
 	DDX_Check(pDX, IDC_CHECK9, m_bSpeedNotReset);
 
@@ -84,12 +82,6 @@ BOOL CPPagePlayback::OnInitDialog()
 	m_iLoopForever	= s.fLoopForever ? 1 : 0;
 	m_nLoops		= s.nLoops;
 	m_fRewind		= s.fRewind;
-
-	for (int idx = 1; idx <= 10; idx++) {
-		CString str; str.Format(L"%d", idx);
-		m_nVolumeStepCtrl.AddString(str);
-	}
-	m_nVolumeStep = s.nVolumeStep - 1;
 
 	AddStringData(m_nSpeedStepCtrl, ResStr(IDS_AG_AUTO), 0);
 	AddStringData(m_nSpeedStepCtrl, L"1",     1);
@@ -145,9 +137,6 @@ BOOL CPPagePlayback::OnApply()
 	s.fReportFailedPins = !!m_fReportFailedPins;
 	s.strSubtitlesLanguageOrder = m_subtitlesLanguageOrder;
 	s.strAudiosLanguageOrder = m_audiosLanguageOrder;
-	s.nVolumeStep = m_nVolumeStep + 1;
-	AfxGetMainFrame()->m_wndToolBar.m_volctrl.SetPageSize(s.nVolumeStep);
-
 	s.nSpeedStep = GetCurItemData(m_nSpeedStepCtrl);
 	s.bSpeedNotReset = !!m_bSpeedNotReset;
 
