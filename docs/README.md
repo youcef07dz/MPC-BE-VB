@@ -1,14 +1,14 @@
 # MPC-BE-VB — Media Player Classic with Volume Boost
 
-MPC-BE-VB is a fork of [MPC-BE](https://github.com/Aleksoid1978/MPC-BE) (Media Player Classic - Black Edition) that extends the volume range from 100% to **1000%** (10x) by default, with a configurable boost ceiling up to **2000%** (20x) and adjustable step size — all controllable via mouse wheel, just like VLC.
+MPC-BE-VB is a fork of [MPC-BE](https://github.com/Aleksoid1978/MPC-BE) (Media Player Classic - Black Edition) that extends the volume range from 100% to **2000%** (20x) by default, with configurable ceiling and precise manual step control in Audio options.
 
 ## What's different from upstream MPC-BE
 
-- **Volume range 0–1000%** instead of 0–100% (configurable ceiling 1x–20x via boost slider in Audio options)
-- **Adjustable step size** (1–20 slider positions per click, default 5) with Boost/Step preset submenus under Play > Volume
+- **Volume range 0–2000%** instead of 0–100% (configurable ceiling 1x–20x via boost slider in Audio options)
+- **Manual volume step control**: set an exact step size in percent or use the Boost/Step preset submenus under Play > Volume (previously adjustable step size 1–20 slider positions per click; retains compatibility)
 - **Mouse wheel over the volume slider** boosts up to the configured ceiling
 - **Visual bar stays at full width** for values above 100% (clean UI)
-- **Audio renderer handles boost** via the same logarithmic volume curve (`dB = 2000 * log10(v/100)`)
+- **Audio renderer handles boost** via the same logarithmic volume curve (`dB = 2000 * log10(v/100)`) — extended to support the higher ceiling
 - **Registry, command-line, Web UI, LCD** — all interfaces support the full range
 - **LTCG removed** from common.props to fix soxr heap corruption on rebuild
 - **Auto-update disabled** — no startup check, no menu item, no background poll
