@@ -13,7 +13,7 @@ IF /I %ERRORLEVEL%==0 GOTO :GIT_OK
 
 SET gitexe="c:\Program Files\Git\cmd\git.exe"
 IF NOT EXIST %gitexe% SET gitexe="c:\Program Files\Git\bin\git.exe"
-IF NOT EXIST %gitexe% GOTO :ÑHANGE_ÑHECK
+IF NOT EXIST %gitexe% GOTO :CHANGE_CHECK
 
 :GIT_OK
 
@@ -21,7 +21,7 @@ FOR /F "delims=" %%A IN ('%gitexe% describe --long') DO (
   SET GIT_DESCRIBE_STR=%%A
 )
 
-IF NOT DEFINED GIT_DESCRIBE_STR GOTO :ÑHANGE_ÑHECK
+IF NOT DEFINED GIT_DESCRIBE_STR GOTO :CHANGE_CHECK
 
 FOR /F "tokens=2 delims=-" %%A IN ("%GIT_DESCRIBE_STR%") DO (
   SET GIT_REV_COUNT=%%A
@@ -39,7 +39,7 @@ FOR /F "delims=" %%A IN ('%gitexe% log -1 --date^=format:%%Y-%%m-%%d --pretty^=f
   SET GIT_REV_DATE=%%A
 )
 
-:ÑHANGE_ÑHECK
+:CHANGE_CHECK
 
 SET SrcManifest="src\apps\mplayerc\res\mpc-be.exe.manifest.conf"
 SET DstManifest="src\apps\mplayerc\res\mpc-be.exe.manifest"

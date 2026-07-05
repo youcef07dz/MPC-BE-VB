@@ -18,17 +18,23 @@ jobs:
       - name: Install Inno Setup
         run: choco install innosetup --no-progress --confirm
 
-      - name: Build x86
-        run: |
-          msbuild mpc-be.sln /t:Build /p:Configuration=Release /p:Platform=Win32 /m:2
-          msbuild mpciconlib.sln /t:Build /p:Configuration=Release /p:Platform=Win32 /m:2
-          msbuild MPCBEShellExt.sln /t:Build /p:Configuration=Release /p:Platform=Win32 /m:2
+      - name: Build mpc-be x86
+        run: msbuild mpc-be.sln /t:Build /p:Configuration=Release /p:Platform=Win32 /m:2
 
-      - name: Build x64
-        run: |
-          msbuild mpc-be.sln /t:Build /p:Configuration=Release /p:Platform=x64 /m:2
-          msbuild mpciconlib.sln /t:Build /p:Configuration=Release /p:Platform=x64 /m:2
-          msbuild MPCBEShellExt.sln /t:Build /p:Configuration=Release /p:Platform=x64 /m:2
+      - name: Build mpciconlib x86
+        run: msbuild mpciconlib.sln /t:Build /p:Configuration=Release /p:Platform=Win32 /m:2
+
+      - name: Build MPCBEShellExt x86
+        run: msbuild MPCBEShellExt.sln /t:Build /p:Configuration=Release /p:Platform=Win32 /m:2
+
+      - name: Build mpc-be x64
+        run: msbuild mpc-be.sln /t:Build /p:Configuration=Release /p:Platform=x64 /m:2
+
+      - name: Build mpciconlib x64
+        run: msbuild mpciconlib.sln /t:Build /p:Configuration=Release /p:Platform=x64 /m:2
+
+      - name: Build MPCBEShellExt x64
+        run: msbuild MPCBEShellExt.sln /t:Build /p:Configuration=Release /p:Platform=x64 /m:2
 
       - name: Create x86 Installer
         run: iscc /Q /O"_bin" /DWin32Build /DCI_BUILD distrib\mpc-be_setup.iss
