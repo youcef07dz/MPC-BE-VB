@@ -1,73 +1,84 @@
 name: Build MPC-BE
 
 on:
-  workflow_dispatch:
+  push:
+    paths-ignore:
+      - .github/workflows/main.yml
+      - '**.txt'
+      - '**.md'
+      - '**.cmd'
+      - '**.bat'
+      - '**.manifest.conf'
+      - '**.manifest.template'
+      - include/Version.h
+  pull_request:
+    paths-ignore:
+      - .github/workflows/main.yml
+      - '**.txt'
+      - '**.md'
+      - '**.cmd'
+      - '**.bat'
+      - '**.vcxproj.filters'
+      - '**.manifest.conf'
+      - '**.manifest.template'
+      - include/Version.h
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: windows-2022
+    timeout-minutes: 60
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
           submodules: recursive
 
-      - name: Setup MSBuild
-        uses: microsoft/setup-msbuild@v2
-
-      - name: Install Inno Setup
-        run: choco install innosetup --no-progress --confirm
-
-      - name: Setup MSYS2
-        uses: msys2/setup-msys2@v2
-        with:
-          msystem: MINGW64
-          install: >-
-            mingw-w64-x86_64-gcc
-            mingw-w64-i686-gcc
-            make
-            nasm
-
-      - name: Set MSYS2 env vars
-        shell: powershell
+      - name: Prepare MSYS
         run: |
-          $msys = if ($env:MSYS2_DIR) { $env:MSYS2_DIR } else { "C:\msys64" }
-          echo "MPCBE_MINGW=$msys\mingw64" | Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
-          echo "MPCBE_MSYS=$msys" | Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
+          curl -sSL https://github.com/Aleksoid1978/MSYS/raw/main/MSYS_MinGW-w64_GCC_1521_x86-x64.7z -o MSYS.7z
+          7z x MSYS.7z -oC:\\MSYS
+          echo '@ECHO OFF' > environments.bat
+          echo 'SET "MPCBE_MSYS=C:\\MSYS"' >> environments.bat
+          echo 'SET "MPCBE_MINGW=C:\\MSYS\\mingw"' >> environments.bat
+          .\\update_gcc.bat
+        shell: pwsh
 
-      - name: Build mpc-be x86
-        run: msbuild mpc-be.sln /t:Build /p:Configuration=Release /p:Platform=Win32 /m:2
+      - name: Clean
+        run: |
+          .\\build.bat Clean All NoWait
+        shell: pwsh
 
-      - name: Build mpciconlib x86
-        run: msbuild mpciconlib.sln /t:Build /p:Configuration=Release /p:Platform=Win32 /m:2
+      - name: Build MPC-BE
+        run: |
+          .\\build.bat Build Packages NoWait
+        shell: pwsh
 
-      - name: Build MPCBEShellExt x86
-        run: msbuild MPCBEShellExt.sln /t:Build /p:Configuration=Release /p:Platform=Win32 /m:2
-
-      - name: Build mpc-be x64
-        run: msbuild mpc-be.sln /t:Build /p:Configuration=Release /p:Platform=x64 /m:2
-
-      - name: Build mpciconlib x64
-        run: msbuild mpciconlib.sln /t:Build /p:Configuration=Release /p:Platform=x64 /m:2
-
-      - name: Build MPCBEShellExt x64
-        run: msbuild MPCBEShellExt.sln /t:Build /p:Configuration=Release /p:Platform=x64 /m:2
-
-      - name: Create x86 Installer
-        run: iscc /Q /O"_bin" /DWin32Build /DCI_BUILD distrib\mpc-be_setup.iss
-
-      - name: Create x64 Installer
-        run: iscc /Q /O"_bin" /DCI_BUILD distrib\mpc-be_setup.iss
-
-      - name: Upload Artifacts
-        uses: actions/upload-artifact@v4
+      - name: Upload Installer x64
+        uses: actions/upload-artifact@v7
         with:
-          name: mpc-be-installers
-          path: _bin\MPC-BE*.exe
+          name: "Installer x64" 
+          path: _bin/Packages/**/MPC-BE*.x64-installer.zip
+          compression-level: 0
 
-      - name: Create Release
-        if: startsWith(github.ref, 'refs/tags/')
-        uses: softprops/action-gh-release@v2
+      - name: Upload Zip x64
+        uses: actions/upload-artifact@v7
         with:
-          files: _bin\MPC-BE*.exe
+          name: "Zip x64" 
+          path: _bin/Packages/**/MPC-BE*.x64.7z
+          compression-level: 0
+
+      - name: Upload Installer x86
+        uses: actions/upload-artifact@v7
+        with:
+          name: "Installer x86" 
+          path: _bin/Packages/**/MPC-BE*.x86-installer.zip
+          compression-level: 0
+
+      - name: Upload Zip x86
+        uses: actions/upload-artifact@v7
+        with:
+          name: "Zip x86" 
+          path: _bin/Packages/**/MPC-BE*.x86.7z
+          compression-level: 0
