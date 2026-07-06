@@ -1,10 +1,10 @@
 # MPC-BE-VB — Media Player Classic with Volume Boost
 
-MPC-BE-VB is a fork of [MPC-BE](https://github.com/Aleksoid1978/MPC-BE) (Media Player Classic - Black Edition) that extends the volume range from 100% to **2000%** (20x) by default, with configurable ceiling and precise manual step control in Audio options.
+MPC-BE-VB is a fork of [MPC-BE](https://github.com/Aleksoid1978/MPC-BE) (Media Player Classic - Black Edition) that extends the volume range from 100% to **1000%** (10x) by default, with configurable ceiling and precise manual step control in Audio options.
 
 ## What's different from upstream MPC-BE
 
-- **Volume range 0–2000%** instead of 0–100% (configurable ceiling 1x–20x via boost slider in Audio options)
+- **Volume range 0–1000%** instead of 0–100% (configurable ceiling 1x–10x via boost slider in Audio options)
 - **Manual volume step control**: set an exact step size in percent or use the Boost/Step preset submenus under Play > Volume (previously adjustable step size 1–20 slider positions per click; retains compatibility)
 - **Mouse wheel over the volume slider** boosts up to the configured ceiling
 - **Visual bar stays at full width** for values above 100% (clean UI)
