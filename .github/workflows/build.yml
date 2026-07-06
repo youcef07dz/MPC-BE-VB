@@ -1,27 +1,11 @@
 name: Build MPC-BE
 
 on:
+  workflow_dispatch:
   push:
-    paths-ignore:
-      - .github/workflows/main.yml
-      - '**.txt'
-      - '**.md'
-      - '**.cmd'
-      - '**.bat'
-      - '**.manifest.conf'
-      - '**.manifest.template'
-      - include/Version.h
+    branches: [ "master", "main" ]
   pull_request:
-    paths-ignore:
-      - .github/workflows/main.yml
-      - '**.txt'
-      - '**.md'
-      - '**.cmd'
-      - '**.bat'
-      - '**.vcxproj.filters'
-      - '**.manifest.conf'
-      - '**.manifest.template'
-      - include/Version.h
+    branches: [ "master", "main" ]
 
 jobs:
   build:
@@ -30,55 +14,53 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
           submodules: recursive
 
-      - name: Prepare MSYS
+      - name: Setup MSYS/MinGW toolchain
         run: |
-          curl -sSL https://github.com/Aleksoid1978/MSYS/raw/main/MSYS_MinGW-w64_GCC_1521_x86-x64.7z -o MSYS.7z
-          7z x MSYS.7z -oC:\\MSYS
-          echo '@ECHO OFF' > environments.bat
-          echo 'SET "MPCBE_MSYS=C:\\MSYS"' >> environments.bat
-          echo 'SET "MPCBE_MINGW=C:\\MSYS\\mingw"' >> environments.bat
-          .\\update_gcc.bat
+          .\toolchains\setup-msys.ps1
         shell: pwsh
+
+      - name: Copy GCC runtime libs
+        run: |
+          .\update_gcc.bat
+        shell: cmd
 
       - name: Clean
-        run: |
-          .\\build.bat Clean All NoWait
-        shell: pwsh
+        run: .\build.bat Clean All NoWait
+        shell: cmd
 
       - name: Build MPC-BE
-        run: |
-          .\\build.bat Build Packages NoWait
-        shell: pwsh
+        run: .\build.bat Build Packages NoWait
+        shell: cmd
 
       - name: Upload Installer x64
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@v4
         with:
-          name: "Installer x64" 
+          name: Installer-x64
           path: _bin/Packages/**/MPC-BE*.x64-installer.zip
           compression-level: 0
 
-      - name: Upload Zip x64
-        uses: actions/upload-artifact@v7
+      - name: Upload 7z x64
+        uses: actions/upload-artifact@v4
         with:
-          name: "Zip x64" 
+          name: Package-x64
           path: _bin/Packages/**/MPC-BE*.x64.7z
           compression-level: 0
 
       - name: Upload Installer x86
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@v4
         with:
-          name: "Installer x86" 
+          name: Installer-x86
           path: _bin/Packages/**/MPC-BE*.x86-installer.zip
           compression-level: 0
 
-      - name: Upload Zip x86
-        uses: actions/upload-artifact@v7
+      - name: Upload 7z x86
+        uses: actions/upload-artifact@v4
         with:
-          name: "Zip x86" 
+          name: Package-x86
           path: _bin/Packages/**/MPC-BE*.x86.7z
           compression-level: 0

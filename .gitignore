@@ -1,3 +1,6 @@
+/toolchains/msys/
+/toolchains/*.7z
+
 *.aps
 *.opendb
 *.opensdf
