@@ -43,13 +43,13 @@ ifeq ($(64BIT),yes)
 	GCC_PREFIX  = x86_64-w64-mingw32-
 	TARGET_OS   = x86_64-w64-mingw32
 	CFLAGS     += -DWIN64 -D_WIN64 -DARCH_X86_64 -DPIC
-	OPTFLAGS    = -m64 -fno-leading-underscore
+	OPTFLAGS    = -fno-leading-underscore
 	NASMFLAGS  += -f win64 -DWIN64=1 -DARCH_X86_32=0 -DARCH_X86_64=1 -DPIC
 else
-	GCC_PREFIX  = x86_64-w64-mingw32-
+	GCC_PREFIX  = i686-w64-mingw32-
 	TARGET_OS   = i686-w64-mingw32
 	CFLAGS     += -DWIN32 -D_WIN32 -DARCH_X86_32 -Wno-incompatible-pointer-types
-	OPTFLAGS    = -m32 -march=i686 -msse -msse2 -mfpmath=sse -mstackrealign
+	OPTFLAGS    = -march=i686 -msse -msse2 -mfpmath=sse -mstackrealign
 	NASMFLAGS  += -f win32 -DWIN32=1 -DARCH_X86_32=1 -DARCH_X86_64=0 -DPREFIX
 endif
 
