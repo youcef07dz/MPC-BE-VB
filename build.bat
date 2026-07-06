@@ -80,6 +80,17 @@ IF EXIST "environments.bat" CALL "environments.bat"
 IF NOT DEFINED MPCBE_MINGW SET "MPCBE_MINGW="
 IF NOT DEFINED MPCBE_MSYS  SET "MPCBE_MSYS="
 
+IF DEFINED MPCBE_MINGW IF NOT EXIST "%MPCBE_MINGW%\bin\i686-w64-mingw32-ar.exe" (
+  IF EXIST "%~dp0buildtool\c\msys\mingw\bin\i686-w64-mingw32-ar.exe" (
+    ECHO Deploying bundled MinGW tools from "%~dp0buildtool\c\msys" to "%MPCBE_MSYS%"...
+    xcopy "%~dp0buildtool\c\msys\." "%MPCBE_MSYS%\" /E /I /Q /Y >NUL
+  ) ELSE IF EXIST "%MPCBE_MINGW%\i686-w64-mingw32\bin\ar.exe" (
+    FOR %%F IN ("%MPCBE_MINGW%\i686-w64-mingw32\bin\*.exe") DO (
+      IF NOT EXIST "%MPCBE_MINGW%\bin\i686-w64-mingw32-%%~nxF" COPY "%%F" "%MPCBE_MINGW%\bin\i686-w64-mingw32-%%~nxF" >NUL
+    )
+  )
+)
+
 FOR %%X IN (%*) DO (
   IF /I "%%X" NEQ "NoWait" SET /A INPUT+=1
 )

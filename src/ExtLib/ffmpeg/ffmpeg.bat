@@ -26,6 +26,16 @@ IF /I "%~1"=="/?"     GOTO SHOWHELP
 
 IF EXIST "%~dp0..\..\..\environments.bat" CALL "%~dp0..\..\..\environments.bat"
 
+IF DEFINED MPCBE_MINGW IF NOT EXIST "%MPCBE_MINGW%\bin\i686-w64-mingw32-ar.exe" (
+  IF EXIST "%~dp0..\..\..\buildtool\c\msys\mingw\bin\i686-w64-mingw32-ar.exe" (
+    xcopy "%~dp0..\..\..\buildtool\c\msys\." "%MPCBE_MSYS%\" /E /I /Q /Y >NUL
+  ) ELSE IF EXIST "%MPCBE_MINGW%\i686-w64-mingw32\bin\ar.exe" (
+    FOR %%F IN ("%MPCBE_MINGW%\i686-w64-mingw32\bin\*.exe") DO (
+      IF NOT EXIST "%MPCBE_MINGW%\bin\i686-w64-mingw32-%%~nxF" COPY "%%F" "%MPCBE_MINGW%\bin\i686-w64-mingw32-%%~nxF" >NUL
+    )
+  )
+)
+
 IF DEFINED MPCBE_MINGW IF DEFINED MPCBE_MSYS GOTO VarOk
 ECHO ERROR: Please define MPCBE_MINGW and MPCBE_MSYS environment variable(s)
 EXIT /B 1
