@@ -1,4 +1,4 @@
-// Microsoft Visual C++ generated resource script.
+﻿// Microsoft Visual C++ generated resource script.
 //
 #pragma code_page(65001)
 
@@ -1768,6 +1768,13 @@ BEGIN
             MENUITEM "&Sus (Crește volumul)",                 ID_VOLUME_UP
             MENUITEM "&Jos (Scade volumul)",             ID_VOLUME_DOWN
             MENUITEM "&Mut (Fără sonor / Silențios)",                 ID_VOLUME_MUTE
+            MENUITEM SEPARATOR
+            POPUP "Boost"
+            BEGIN
+                MENUITEM "x2",                          ID_BOOST_2
+                MENUITEM "x5",                          ID_BOOST_5
+                MENUITEM "x10",                         ID_BOOST_10
+            END
         END
         MENUITEM "După redare",                  ID_SUBMENU_AFTERPLAYBACK
     END
@@ -1850,6 +1857,13 @@ BEGIN
             MENUITEM "&Sus (Crește volumul)",                 ID_VOLUME_UP
             MENUITEM "&Jos (Scade volumul)",             ID_VOLUME_DOWN
             MENUITEM "&Mut (Fără sonor / Silențios)",                 ID_VOLUME_MUTE
+            MENUITEM SEPARATOR
+            POPUP "Boost"
+            BEGIN
+                MENUITEM "x2",                          ID_BOOST_2
+                MENUITEM "x5",                          ID_BOOST_5
+                MENUITEM "x10",                         ID_BOOST_10
+            END
         END
         MENUITEM "După redare",                  ID_SUBMENU_AFTERPLAYBACK
         MENUITEM SEPARATOR
@@ -2047,6 +2061,13 @@ BEGIN
             MENUITEM "&Sus (Crește volumul)",                 ID_VOLUME_UP
             MENUITEM "&Jos (Scade volumul)",             ID_VOLUME_DOWN
             MENUITEM "&Mut (Fără sonor / Silențios)",                 ID_VOLUME_MUTE
+            MENUITEM SEPARATOR
+            POPUP "Boost"
+            BEGIN
+                MENUITEM "x2",                          ID_BOOST_2
+                MENUITEM "x5",                          ID_BOOST_5
+                MENUITEM "x10",                         ID_BOOST_10
+            END
         END
         MENUITEM "După redare",                  ID_SUBMENU_AFTERPLAYBACK
         MENUITEM SEPARATOR

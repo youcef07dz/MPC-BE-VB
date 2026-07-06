@@ -131,12 +131,8 @@ BEGIN
     CTEXT           "Volume Boost",IDC_STATIC,42,97,55,8
     RTEXT           "1x",IDC_STATIC,7,117,20,8
     CONTROL         "",IDC_SLIDER3,"msctls_trackbar32",TBS_AUTOTICKS | TBS_BOTH | TBS_TOOLTIPS | WS_TABSTOP | 0x400,28,109,85,19
-    LTEXT           "20x",IDC_STATIC,116,117,27,8
-    CTEXT           "Volume Step",IDC_STATIC,42,132,55,8
-    RTEXT           "1",IDC_STATIC,7,152,20,8
-    CONTROL         "",IDC_SLIDER4,"msctls_trackbar32",TBS_AUTOTICKS | TBS_BOTH | TBS_TOOLTIPS | WS_TABSTOP | 0x400,28,144,85,19
-    LTEXT           "20",IDC_STATIC,116,152,27,8
-    GROUPBOX        "Audio open settings",IDC_STATIC,5,178,285,51
+    LTEXT           "10x",IDC_STATIC,116,117,27,8
+    GROUPBOX        "Audio open settings",IDC_STATIC,5,144,285,51
     CONTROL         "Auto-load audio files",IDC_CHECK2,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,10,189,276,9
     EDITTEXT        IDC_EDIT4,10,200,222,13,ES_AUTOHSCROLL
     PUSHBUTTON      "Reset",IDC_BUTTON2,235,200,50,13
@@ -1776,15 +1772,6 @@ BEGIN
                 MENUITEM "x2",                          ID_BOOST_2
                 MENUITEM "x5",                          ID_BOOST_5
                 MENUITEM "x10",                         ID_BOOST_10
-                MENUITEM "x20",                         ID_BOOST_20
-            END
-            POPUP "Step"
-            BEGIN
-                MENUITEM "1",                           ID_STEP_1
-                MENUITEM "2",                           ID_STEP_2
-                MENUITEM "5",                           ID_STEP_5
-                MENUITEM "10",                          ID_STEP_10
-                MENUITEM "20",                          ID_STEP_20
             END
         END
         MENUITEM "After Playback",              ID_SUBMENU_AFTERPLAYBACK
@@ -2072,15 +2059,6 @@ BEGIN
                 MENUITEM "x2",                          ID_BOOST_2
                 MENUITEM "x5",                          ID_BOOST_5
                 MENUITEM "x10",                         ID_BOOST_10
-                MENUITEM "x20",                         ID_BOOST_20
-            END
-            POPUP "Step"
-            BEGIN
-                MENUITEM "1",                           ID_STEP_1
-                MENUITEM "2",                           ID_STEP_2
-                MENUITEM "5",                           ID_STEP_5
-                MENUITEM "10",                          ID_STEP_10
-                MENUITEM "20",                          ID_STEP_20
             END
         END
         MENUITEM "After Playback",              ID_SUBMENU_AFTERPLAYBACK

@@ -53,7 +53,7 @@ bool CVolumeCtrl::Create(CWnd* pParentWnd)
 	}
 
 	EnableToolTips(TRUE);
-	SetRange(0, 1000);
+	SetRangeFromBoost(s.nVolumeBoost);
 	SetPos(s.nVolume);
 	SetPageSize(s.nVolumeStep);
 	SetLineSize(0);
@@ -82,16 +82,33 @@ void CVolumeCtrl::SetPosInternal(int pos)
 	GetParent()->PostMessageW(WM_HSCROLL, MAKEWPARAM((short)pos, SB_THUMBPOSITION), (LPARAM)m_hWnd);
 }
 
+void CVolumeCtrl::SetRangeFromBoost(int boost)
+{
+	int maxRange = std::max(1, 1000 / std::max(1, boost));
+	int oldStart, oldStop;
+	GetRange(oldStart, oldStop);
+	if (oldStop > 0 && oldStop != maxRange) {
+		int pos = GetPos() * maxRange / oldStop;
+		SetRange(0, maxRange);
+		SetPos(pos);
+	} else {
+		SetRange(0, maxRange);
+	}
+}
+
+static int ClampedStep(int boost)
+{
+	return std::max(1, 5 * 10 / std::max(1, boost));
+}
+
 void CVolumeCtrl::IncreaseVolume()
 {
-	// align volume up to step. recommend using steps 1, 2, 5 and 10
-	SetPosInternal(IncreaseByGrid(GetPos(), GetPageSize()));
+	SetPosInternal(IncreaseByGrid(GetPos(), ClampedStep(AfxGetAppSettings().nVolumeBoost)));
 }
 
 void CVolumeCtrl::DecreaseVolume()
 {
-	// align volume down to step. recommend using steps 1, 2, 5 and 10
-	SetPosInternal(DecreaseByGrid(GetPos(), GetPageSize()));
+	SetPosInternal(DecreaseByGrid(GetPos(), ClampedStep(AfxGetAppSettings().nVolumeBoost)));
 }
 
 BEGIN_MESSAGE_MAP(CVolumeCtrl, CSliderCtrl)
@@ -241,7 +258,9 @@ void CVolumeCtrl::OnNMCustomdraw(NMHDR* pNMHDR, LRESULT* pResult)
 						CRect r_volume(rc);
 						r_volume.DeflateRect(&DeflateRect);
 						const int width_volume = r_volume.Width() - 9;
-						const int nVolPos = rc.left + (std::min(nVolume, 100) * width_volume / 100) + 4;
+						int start, stop;
+						GetRange(start, stop);
+						const int nVolPos = rc.left + (std::min(nVolume, stop) * width_volume / std::max(1, stop)) + 4;
 
 						if (m_VolumeGradient.Size()) {
 							m_VolumeGradient.Paint(&imageDC, rc, 0);

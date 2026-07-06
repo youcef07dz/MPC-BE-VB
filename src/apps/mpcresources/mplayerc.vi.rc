@@ -1,4 +1,4 @@
-// Microsoft Visual C++ generated resource script.
+﻿// Microsoft Visual C++ generated resource script.
 //
 #pragma code_page(65001)
 
@@ -1765,6 +1765,13 @@ BEGIN
             MENUITEM "&Tăng",                         ID_VOLUME_UP
             MENUITEM "&Giảm",                       ID_VOLUME_DOWN
             MENUITEM "&Tắt tiếng",                       ID_VOLUME_MUTE
+            MENUITEM SEPARATOR
+            POPUP "Boost"
+            BEGIN
+                MENUITEM "x2",                          ID_BOOST_2
+                MENUITEM "x5",                          ID_BOOST_5
+                MENUITEM "x10",                         ID_BOOST_10
+            END
         END
         MENUITEM "Sau khi phát xong",              ID_SUBMENU_AFTERPLAYBACK
     END
@@ -1848,6 +1855,13 @@ BEGIN
             MENUITEM "&Tăng",                         ID_VOLUME_UP
             MENUITEM "&Giảm",                       ID_VOLUME_DOWN
             MENUITEM "&Tắt tiếng",                       ID_VOLUME_MUTE
+            MENUITEM SEPARATOR
+            POPUP "Boost"
+            BEGIN
+                MENUITEM "x2",                          ID_BOOST_2
+                MENUITEM "x5",                          ID_BOOST_5
+                MENUITEM "x10",                         ID_BOOST_10
+            END
         END
         MENUITEM "Sau khi phát xong",              ID_SUBMENU_AFTERPLAYBACK
         MENUITEM SEPARATOR
@@ -2045,6 +2059,13 @@ BEGIN
             MENUITEM "&Tăng",                         ID_VOLUME_UP
             MENUITEM "&Giảm",                       ID_VOLUME_DOWN
             MENUITEM "&Tắt tiếng",                       ID_VOLUME_MUTE
+            MENUITEM SEPARATOR
+            POPUP "Boost"
+            BEGIN
+                MENUITEM "x2",                          ID_BOOST_2
+                MENUITEM "x5",                          ID_BOOST_5
+                MENUITEM "x10",                         ID_BOOST_10
+            END
         END
         MENUITEM "Sau khi phát xong",              ID_SUBMENU_AFTERPLAYBACK
         MENUITEM SEPARATOR

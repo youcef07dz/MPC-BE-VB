@@ -1,4 +1,4 @@
-// Microsoft Visual C++ generated resource script.
+﻿// Microsoft Visual C++ generated resource script.
 //
 #pragma code_page(65001)
 
@@ -1768,6 +1768,13 @@ BEGIN
             MENUITEM "&Dalt",               ID_VOLUME_UP
             MENUITEM "&Baix",             ID_VOLUME_DOWN
             MENUITEM "&Silenci",              ID_VOLUME_MUTE
+            MENUITEM SEPARATOR
+            POPUP "Boost"
+            BEGIN
+                MENUITEM "x2",                          ID_BOOST_2
+                MENUITEM "x5",                          ID_BOOST_5
+                MENUITEM "x10",                         ID_BOOST_10
+            END
         END
         MENUITEM "Després de la Reproducció",                  ID_SUBMENU_AFTERPLAYBACK
     END
@@ -1851,6 +1858,13 @@ BEGIN
             MENUITEM "&Amunt",              ID_VOLUME_UP
             MENUITEM "A&ball",            ID_VOLUME_DOWN
             MENUITEM "&Silenciar",            ID_VOLUME_MUTE
+            MENUITEM SEPARATOR
+            POPUP "Boost"
+            BEGIN
+                MENUITEM "x2",                          ID_BOOST_2
+                MENUITEM "x5",                          ID_BOOST_5
+                MENUITEM "x10",                         ID_BOOST_10
+            END
         END
         MENUITEM "Després de la Reproducció",                  ID_SUBMENU_AFTERPLAYBACK
         MENUITEM SEPARATOR
@@ -2048,6 +2062,13 @@ BEGIN
             MENUITEM "&Adalt",              ID_VOLUME_UP
             MENUITEM "A&baix",            ID_VOLUME_DOWN
             MENUITEM "&Silenci",              ID_VOLUME_MUTE
+            MENUITEM SEPARATOR
+            POPUP "Boost"
+            BEGIN
+                MENUITEM "x2",                          ID_BOOST_2
+                MENUITEM "x5",                          ID_BOOST_5
+                MENUITEM "x10",                         ID_BOOST_10
+            END
         END
         MENUITEM "Després de la Reproducció",                  ID_SUBMENU_AFTERPLAYBACK
         MENUITEM SEPARATOR

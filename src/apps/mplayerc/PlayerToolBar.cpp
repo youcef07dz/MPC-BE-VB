@@ -734,11 +734,11 @@ void CPlayerToolBar::OnInitialUpdate()
 	br = GetBorders();
 
 	const int offset_right = 6;
-	int offset = 60;
+	int offset = 114;
 	if (AfxGetAppSettings().bUseDarkTheme) {
 		if (r.Height() > 30) {
-			offset = (60 + offset_right) * r.Height() / 30 - offset_right;
-			m_nWidthIncrease = offset - 60;
+			offset = (114 + offset_right) * r.Height() / 30 - offset_right;
+			m_nWidthIncrease = offset - 114;
 		}
 		vr2.SetRect(r.right + br.right - offset, r.top, r.right + br.right + offset_right, r.bottom);
 	} else {

@@ -1,4 +1,4 @@
-// Microsoft Visual C++ generated resource script.
+﻿// Microsoft Visual C++ generated resource script.
 //
 #pragma code_page(65001)
 
@@ -1766,6 +1766,13 @@ BEGIN
             MENUITEM "크게(&U)",                ID_VOLUME_UP
             MENUITEM "작게(&D)",               ID_VOLUME_DOWN
             MENUITEM "음소거(&M)",               ID_VOLUME_MUTE
+            MENUITEM SEPARATOR
+            POPUP "Boost"
+            BEGIN
+                MENUITEM "x2",                          ID_BOOST_2
+                MENUITEM "x5",                          ID_BOOST_5
+                MENUITEM "x10",                         ID_BOOST_10
+            END
         END
         MENUITEM "재생이 끝나면",                  ID_SUBMENU_AFTERPLAYBACK
     END
@@ -1849,6 +1856,13 @@ BEGIN
             MENUITEM "크게(&U)",                ID_VOLUME_UP
             MENUITEM "작게(&D)",               ID_VOLUME_DOWN
             MENUITEM "음소거(&M)",               ID_VOLUME_MUTE
+            MENUITEM SEPARATOR
+            POPUP "Boost"
+            BEGIN
+                MENUITEM "x2",                          ID_BOOST_2
+                MENUITEM "x5",                          ID_BOOST_5
+                MENUITEM "x10",                         ID_BOOST_10
+            END
         END
         MENUITEM "재생이 끝나면",                  ID_SUBMENU_AFTERPLAYBACK
         MENUITEM SEPARATOR
@@ -2046,6 +2060,13 @@ BEGIN
             MENUITEM "크게(&U)",                ID_VOLUME_UP
             MENUITEM "작게(&D)",               ID_VOLUME_DOWN
             MENUITEM "음소거(&M)",               ID_VOLUME_MUTE
+            MENUITEM SEPARATOR
+            POPUP "Boost"
+            BEGIN
+                MENUITEM "x2",                          ID_BOOST_2
+                MENUITEM "x5",                          ID_BOOST_5
+                MENUITEM "x10",                         ID_BOOST_10
+            END
         END
         MENUITEM "재생이 끝나면",                  ID_SUBMENU_AFTERPLAYBACK
         MENUITEM SEPARATOR

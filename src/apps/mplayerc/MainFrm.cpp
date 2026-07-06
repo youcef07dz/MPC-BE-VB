@@ -421,7 +421,7 @@ BEGIN_MESSAGE_MAP(CMainFrame, CFrameWnd)
 
 	ON_COMMAND_RANGE(ID_FILTERSTREAMS_SUBITEM_START, ID_FILTERSTREAMS_SUBITEM_END, OnSelectStream)
 	ON_COMMAND_RANGE(ID_VOLUME_UP, ID_VOLUME_MUTE, OnPlayVolume)
-	ON_COMMAND_RANGE(ID_BOOST_2, ID_BOOST_20, OnVolumeBoostPreset)
+	ON_COMMAND_RANGE(ID_BOOST_2, ID_BOOST_10, OnVolumeBoostPreset)
 	ON_COMMAND_RANGE(ID_STEP_1, ID_STEP_20, OnVolumeStepPreset)
 	ON_COMMAND_RANGE(ID_VOLUME_GAIN_INC, ID_VOLUME_GAIN_MAX, OnPlayVolumeGain)
 	ON_COMMAND(ID_NORMALIZE, OnAutoVolumeControl)
@@ -9225,7 +9225,7 @@ void CMainFrame::OnPlayVolume(UINT nID)
 	m_Lcd.SetVolume((m_wndToolBar.Volume > -10000 ? nEffective : 1));
 }
 
-static const int BoostValues[] = { 2, 5, 10, 20 };
+static const int BoostValues[] = { 2, 5, 10 };
 static const int StepValues[] = { 1, 2, 5, 10, 20 };
 
 void CMainFrame::OnVolumeBoostPreset(UINT nID)

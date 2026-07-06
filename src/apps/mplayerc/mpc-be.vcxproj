@@ -150,6 +150,9 @@
     <ClCompile Include="mingw_compat.cpp">
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="mingw_ceilf.c" Condition="'$(Platform)'=='Win32'">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="Mpeg2SectionData.cpp" />
     <ClCompile Include="mplayerc.cpp" />
     <ClCompile Include="MultiMonitor.cpp" />

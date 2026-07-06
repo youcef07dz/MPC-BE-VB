@@ -62,6 +62,7 @@ public:
 	void IncreaseVolume(), DecreaseVolume();
 
 	void SetPosInternal(int pos);
+	void SetRangeFromBoost(int boost);
 
 	int m_nUseDarkTheme = 0;
 
