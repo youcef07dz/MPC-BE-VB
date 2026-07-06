@@ -1,0 +1,38 @@
+Build started 7/5/2026 9:12:50 AM.
+Logging verbosity is set to: Detailed.     0>Process = "C:\Program Files\Microsoft Visual Studio\18\Community\MSBuild\Current\Bin\MSBuild.exe"
+       MSBuild executable path = "C:\Program Files\Microsoft Visual Studio\18\Community\MSBuild\Current\Bin\MSBuild.exe"
+       Command line arguments = ""C:\Program Files\Microsoft Visual Studio\18\Community\MSBuild\Current\Bin\MSBuild.exe" src\apps\mplayerc\mpc-be.vcxproj /p:Configuration=Release /p:Platform=Win32 /t:Build /m /v:minimal /fl /flp:logfile=build_log.txt"
+       Current directory = "C:\Users\hc\source\repos\MPC-BE-VB"
+       MSBuild version = "18.7.8+1ac568fee"
+       Based on the Windows registry key LongPathsEnabled, the LongPaths feature is enabled.
+       Based on the Windows registry key VerifiedAndReputablePolicyState, SAC state = 0: turned off.
+       Some command line switches were read from the auto-response file "C:\Program Files\Microsoft Visual Studio\18\Community\MSBuild\Current\Bin\MSBuild.rsp". To disable this file, use the "-noAutoResponse" switch.
+       
+       Property reassignment: $(MSBuildExtensionsPath)="C:\Program Files\Microsoft Visual Studio\18\Community\MSBuild" (previous value: "C:\Program Files (x86)\MSBuild") at 
+       Property reassignment: $(MSBuildExtensionsPath32)="C:\Program Files\Microsoft Visual Studio\18\Community\MSBuild" (previous value: "C:\Program Files (x86)\MSBuild") at 
+       Search paths being used for $(MSBuildExtensionsPath) are C:\Program Files\Microsoft Visual Studio\18\Community\MSBuild;$(MSBuildProgramFiles32)\MSBuild
+       Trying to import C:\Program Files\Microsoft Visual Studio\18\Community\MSBuild\$(MSBuildToolsVersion)\Microsoft.Common.props using extensions path C:\Program Files\Microsoft Visual Studio\18\Community\MSBuild
+       C:\Program Files\Microsoft Visual Studio\18\Community\MSBuild\Current\Microsoft.Common.props(60,5): message : Property reassignment: $(MSBuildProjectExtensionsPath)="C:\Users\hc\source\repos\MPC-BE-VB\src\apps\mplayerc\obj\" (previous value: "obj\") at C:\Program Files\Microsoft Visual Studio\18\Community\MSBuild\Current\Microsoft.Common.props (60,5)
+       C:\Program Files\Microsoft Visual Studio\18\Community\MSBuild\Current\Microsoft.Common.props(84,119): message : Property 'MSBuildUserExtensionsPath' with value 'C:\Users\hc\AppData\Local\Microsoft\MSBuild' expanded from the environment.
+       Search paths being used for $(MSBuildExtensionsPath) are C:\Program Files\Microsoft Visual Studio\18\Community\MSBuild;$(MSBuildProgramFiles32)\MSBuild
+       Trying to import C:\Program Files\Microsoft Visual Studio\18\Community\MSBuild\$(MSBuildToolsVersion)\Imports\Microsoft.Common.props\ImportBefore\* using extensions path C:\Program Files\Microsoft Visual Studio\18\Community\MSBuild
+       The "Configuration" property is a global property, and cannot be modified.
+       Search paths being used for $(MSBuildExtensionsPath) are C:\Program Files\Microsoft Visual Studio\18\Community\MSBuild;$(MSBuildProgramFiles32)\MSBuild
+       Trying to import C:\Program Files\Microsoft Visual Studio\18\Community\MSBuild\$(MSBuildToolsVersion)\Microsoft.VisualStudioVersion.v*.Common.props using extensions path C:\Program Files\Microsoft Visual Studio\18\Community\MSBuild
+       Trying to import C:\Program Files (x86)\MSBuild\$(MSBuildToolsVersion)\Microsoft.VisualStudioVersion.v*.Common.props using extensions path C:\Program Files (x86)\MSBuild
+       Search paths being used for $(MSBuildExtensionsPath) are C:\Program Files\Microsoft Visual Studio\18\Community\MSBuild;$(MSBuildProgramFiles32)\MSBuild
+       The "Configuration" property is a global property, and cannot be modified.
+       C:\Program Files\Microsoft Visual Studio\18\Community\MSBuild\Microsoft\VC\v180\Microsoft.Cpp.Default.props(227,5): message : Property 'LOCALAPPDATA' with value 'C:\Users\hc\AppData\Local' expanded from the environment.
+     1>Project "C:\Users\hc\source\repos\MPC-BE-VB\src\apps\mplayerc\mpc-be.vcxproj" on node 1 (Build target(s)).
+     1>C:\Users\hc\source\repos\MPC-BE-VB\src\apps\mplayerc\mpc-be.vcxproj(28,3): error MSB4019: The imported project "C:\Users\hc\source\repos\MPC-BE-VB\src\apps\mplayerc\src\platform.props" was not found. Confirm that the expression in the Import declaration "$(SolutionDir)src\platform.props", which evaluated to "C:\Users\hc\source\repos\MPC-BE-VB\src\apps\mplayerc\src\platform.props", is correct, and that the file exists on disk.
+     1>Done Building Project "C:\Users\hc\source\repos\MPC-BE-VB\src\apps\mplayerc\mpc-be.vcxproj" (Build target(s)) -- FAILED.
+
+Build FAILED.
+
+       "C:\Users\hc\source\repos\MPC-BE-VB\src\apps\mplayerc\mpc-be.vcxproj" (Build target) (1) ->
+         C:\Users\hc\source\repos\MPC-BE-VB\src\apps\mplayerc\mpc-be.vcxproj(28,3): error MSB4019: The imported project "C:\Users\hc\source\repos\MPC-BE-VB\src\apps\mplayerc\src\platform.props" was not found. Confirm that the expression in the Import declaration "$(SolutionDir)src\platform.props", which evaluated to "C:\Users\hc\source\repos\MPC-BE-VB\src\apps\mplayerc\src\platform.props", is correct, and that the file exists on disk.
+
+    0 Warning(s)
+    1 Error(s)
+
+Time Elapsed 00:00:00.71

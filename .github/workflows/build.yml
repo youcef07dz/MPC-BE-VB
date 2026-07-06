@@ -19,14 +19,22 @@ jobs:
       - name: Install Inno Setup
         run: choco install innosetup --no-progress --confirm
 
-      - name: Install MSYS2 and MinGW
+      - name: Setup MSYS2
+        uses: msys2/setup-msys2@v2
+        with:
+          msystem: MINGW64
+          install: >-
+            mingw-w64-x86_64-gcc
+            mingw-w64-i686-gcc
+            make
+            nasm
+
+      - name: Set MSYS2 env vars
         shell: powershell
         run: |
-          choco install msys2 --no-progress --confirm --params="/InstallDir:C:\msys64" --not-silent
-          $env:Path = "C:\msys64\usr\bin;" + $env:Path
-          C:\msys64\usr\bin\pacman --noconfirm -S mingw-w64-x86_64-gcc mingw-w64-i686-gcc make
-          echo "MPCBE_MINGW=C:\msys64\mingw64" | Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
-          echo "MPCBE_MSYS=C:\msys64" | Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
+          $msys = if ($env:MSYS2_DIR) { $env:MSYS2_DIR } else { "C:\msys64" }
+          echo "MPCBE_MINGW=$msys\mingw64" | Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
+          echo "MPCBE_MSYS=$msys" | Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
 
       - name: Build mpc-be x86
         run: msbuild mpc-be.sln /t:Build /p:Configuration=Release /p:Platform=Win32 /m:2
